@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ups...</title>
+    <link rel="stylesheet" href="enhancements.css" />
 
     <style>
         body{
@@ -17,6 +18,8 @@
             color:#f1ece0;
             font-family:Arial, sans-serif;
             text-align:center;
+            --mono: Arial, sans-serif;
+            --acid:#d6eb37;
         }
 
         h1{
@@ -42,15 +45,22 @@
             background:#d6eb37;
             color:#171614;
         }
+
+        .visit-ambient{position:fixed;right:24px;top:20px;color:#f1ece0;z-index:2}
     </style>
 </head>
 <body>
+
+<audio id="ambient-music" loop preload="metadata"><source src="https://upload.wikimedia.org/wikipedia/commons/5/50/Nocturne_Op._9_no._2_in_E_flat_major.mp3" type="audio/mpeg" /></audio>
+<button class="ambient-toggle visit-ambient" id="ambient-toggle" type="button" aria-pressed="false"><span class="ambient-icon">♩</span> Ambiente <b>OFF</b></button>
 
 <h1>No, no es un museo de verdad.</h1>
 
 <p>Era solo para la expo. Igual gracias por intentar reservar. ❤️</p>
 
 <a href="index.html">Volver</a>
+
+<script src="ambient.js"></script>
 
 </body>
 </html>

@@ -7,15 +7,21 @@
     <meta name="description" content="Colección completa del Museo Digital de la Percepción Sonora." />
     <title>Archivo — SONORA</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="enhancements.css" />
+    <link rel="stylesheet" href="experience.css" />
+    <link rel="stylesheet" href="soundrooms.css" />
+    <link rel="stylesheet" href="polish.css" />
   </head>
   <body class="collection-page">
     <div class="grain" aria-hidden="true"></div>
+    <audio id="ambient-music" loop preload="metadata"><source src="https://upload.wikimedia.org/wikipedia/commons/5/50/Nocturne_Op._9_no._2_in_E_flat_major.mp3" type="audio/mpeg" /></audio>
     <header class="site-header collection-header">
       <a class="wordmark" href="assets/easter-egg.png" aria-label="SONORA, sorpresa">SONORA<span>®</span></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation"><span></span><span></span><span class="sr-only">Abrir menú</span></button>
       <nav id="navigation" aria-label="Navegación principal">
         <a href="index.html#museo">El museo</a><a href="coleccion.html" aria-current="page">Colección</a><a href="index.html#experiencia">Experiencia</a><a href="visitar.html">Visitar</a>
       </nav>
+      <button class="ambient-toggle" id="ambient-toggle" type="button" aria-pressed="false"><span class="ambient-icon">♩</span> Ambiente <b>OFF</b></button>
       <a class="header-cta" href="index.html">← Volver al museo</a>
     </header>
     <main>
@@ -49,9 +55,24 @@
         </div>
         <p class="archive-note">La colección se amplía de manera continua. Nuevas escuchas cada estación.</p>
       </section>
+      <section class="emotion-archive" aria-labelledby="emotion-title">
+        <div class="emotion-heading"><div><span class="section-index">03 / ARCHIVO AFECTIVO</span><p class="eyebrow">Grabaciones reales</p></div><h2 id="emotion-title">Escuchar<br /><em>una emoción.</em></h2><p>El sonido no impone lo que sentís: propone un clima. Elegí una escena y observá cómo cambia tu propia percepción.</p></div>
+        <audio id="emotion-player" preload="none"></audio>
+        <div class="emotion-grid">
+          <button class="emotion-card emotion-fear" type="button" data-emotion="miedo"><span>01 / TENSIÓN</span><div class="emotion-mark">⌁</div><h3>Miedo</h3><p>Tormenta, lluvia y pájaros en un cielo inestable.</p><b>ESCUCHAR ↗</b></button>
+          <button class="emotion-card emotion-joy" type="button" data-emotion="felicidad"><span>02 / APERTURA</span><div class="emotion-mark">◌</div><h3>Felicidad</h3><p>Una risa que irrumpe y contagia el espacio.</p><b>ESCUCHAR ↗</b></button>
+          <button class="emotion-card emotion-sad" type="button" data-emotion="tristeza"><span>03 / REPLIEGUE</span><div class="emotion-mark">⌇</div><h3>Tristeza</h3><p>Lluvia contra una ventana en una tarde sin prisa.</p><b>ESCUCHAR ↗</b></button>
+          <button class="emotion-card emotion-calm" type="button" data-emotion="calma"><span>04 / PAUSA</span><div class="emotion-mark">◍</div><h3>Calma</h3><p>La textura simple y constante de una lluvia cercana.</p><b>ESCUCHAR ↗</b></button>
+        </div>
+        <p class="emotion-status" id="emotion-status" aria-live="polite">SELECCIONÁ UNA ESCENA PARA ESCUCHARLA</p>
+        <p class="emotion-credit">Archivo afectivo: grabaciones de dominio público o con licencias libres de Wikimedia Commons.</p>
+      </section>
       <section class="archive-cta"><p class="eyebrow">La escucha continúa</p><h2>¿No sabés<br />por dónde <em>empezar?</em></h2><a class="circle-link" href="index.html#experiencia"><span>Ir a sala<br />de escucha</span><b>→</b></a></section>
     </main>
-    <footer><a class="wordmark" href="index.html">SONORA<span>®</span></a><p>Museo Digital de la Percepción SONORA<br />Funes · 2026</p><div><a href="https://instagram.com/fran.dubua/" target="_blank" rel="noreferrer">Instagram</a><a href="mailto:riojinzxc@gmail.com">Contacto</a><a href="index.html">Inicio</a></div><small>© SONORA — Todos los derechos reservados.</small></footer>
+    <footer><a class="wordmark" href="index.html">SONORA<span>®</span></a><p>Museo Digital de la Percepción SONORA<br />Funes · 2026</p><div class="footer-links"><a href="https://instagram.com/fran.dubua/" target="_blank" rel="noreferrer">Instagram</a><a href="mailto:riojinzxc@gmail.com">Contacto</a><a href="index.html">Inicio</a></div><details class="credits"><summary>Créditos del proyecto <span>+</span></summary><dl><div><dt>Director del Proyecto</dt><dd>Dubois Francisco</dd></div><div><dt>Programador Principal</dt><dd>Dubois Francisco</dd></div><div><dt>Desarrollador web</dt><dd>Da Campo Santiago</dd></div><div><dt>Diseñador UX/UI</dt><dd>Da Campo Santiago</dd></div><div><dt>Diseñador gráfico</dt><dd>Da Campo Santiago, Gemini, ChatGPT</dd></div><div><dt>Director creativo</dt><dd>Da Campo Santiago</dd></div><div><dt>Investigación y contenido</dt><dd>Dubois Francisco, ChatGPT</dd></div><div><dt>Edición de audio</dt><dd>Dubois Francisco</dd></div><div><dt>Testing</dt><dd>Da Campo Santiago, Mosto Joaquín</dd></div><div><dt>Agradecimientos</dt><dd>Soledad Lanzini, 4to "B"</dd></div></dl></details><small><span>© SONORA — Todos los derechos reservados.</span><span class="affiliate">Afiliado con la Compañía 67©</span></small></footer>
+    <script src="museum-sounds.js"></script>
+    <script src="ambient.js"></script>
+    <script src="emotion-sounds.js"></script>
     <script src="coleccion.js"></script>
   </body>
 </html>

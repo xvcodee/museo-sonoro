@@ -10,9 +10,14 @@
     />
     <title>SONORA — Museo digital de la percepción</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="enhancements.css" />
+    <link rel="stylesheet" href="experience.css" />
+    <link rel="stylesheet" href="soundrooms.css" />
+    <link rel="stylesheet" href="polish.css" />
   </head>
   <body>
     <div class="grain" aria-hidden="true"></div>
+    <audio id="ambient-music" loop preload="metadata"><source src="https://upload.wikimedia.org/wikipedia/commons/5/50/Nocturne_Op._9_no._2_in_E_flat_major.mp3" type="audio/mpeg" /></audio>
     <header class="site-header">
       <a class="wordmark" href="assets/easter-egg.png" aria-label="SONORA, sorpresa">SONORA<span>®</span></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation">
@@ -25,7 +30,8 @@
         <a href="#experiencia">Experiencia</a>
         <a href="#visita">Visitar</a>
       </nav>
-      <a class="header-cta" href="visitar.html">Reservar visita <span>↗</span></a>
+      <button class="ambient-toggle" id="ambient-toggle" type="button" aria-pressed="false"><span class="ambient-icon">♩</span> Ambiente <b>OFF</b></button>
+      <button class="header-cta paywall-open" type="button" data-paywall-open>Reservar visita <span>↗</span></button>
     </header>
 
     <main>
@@ -69,24 +75,24 @@
           <h2 id="coleccion-title">Cuatro formas<br />de <em>oír.</em></h2>
         </div>
         <div class="room-grid">
-          <article class="room room-dark" data-room="01" tabindex="0">
+          <article class="room room-dark" data-room="01" data-sound="ciudad" tabindex="0">
             <span class="room-number">01</span><span class="room-type">Sala inmersiva</span>
             <div class="room-visual pulse-visual"><i></i><i></i><i></i><i></i></div>
             <h3>El pulso<br />de la ciudad</h3><p>Tramas urbanas, motores y voces en tránsito.</p><span class="room-arrow">↗</span>
           </article>
-          <article class="room room-paper" data-room="02" tabindex="0">
+          <article class="room room-paper" data-room="02" data-sound="memoria" tabindex="0">
             <span class="room-number">02</span><span class="room-type">Archivo sonoro</span>
             <div class="room-visual paper-visual"><span>1947</span><i></i><i></i><i></i></div>
             <h3>Memoria<br />en espiral</h3><p>Voces que persisten en el tiempo.</p><span class="room-arrow">↗</span>
           </article>
-          <article class="room room-red" data-room="03" tabindex="0">
+          <article class="room room-red" data-room="03" data-sound="cuerpo" tabindex="0">
             <span class="room-number">03</span><span class="room-type">Laboratorio</span>
             <div class="room-visual ear-visual"><div></div></div>
             <h3>La piel<br />del sonido</h3><p>Vibración, cuerpo y materia.</p><span class="room-arrow">↗</span>
           </article>
-          <article class="room room-line" data-room="04" tabindex="0">
+          <article class="room room-line" data-room="04" data-sound="paisaje" tabindex="0">
             <span class="room-number">04</span><span class="room-type">Paisaje audible</span>
-            <div class="room-visual line-visual"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="room-visual line-visual"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
             <h3>Silencios<br />compartidos</h3><p>Escuchar lo que deja espacio.</p><span class="room-arrow">↗</span>
           </article>
         </div>
@@ -113,22 +119,78 @@
         </div>
       </section>
 
+      <section class="silence-studio" id="sala-cuatro" aria-labelledby="silence-title">
+        <div class="silence-copy"><span class="section-index">04 / SALA INSTRUMENTAL</span><p class="eyebrow">Silencios compartidos</p><h2 id="silence-title">El silencio<br /><em>también se toca.</em></h2><p>Esta es la Sala 4: un instrumento colectivo de nueve notas. Elegí una tonalidad, mové el volumen y llevá la distorsión al límite o dejala respirar.</p><div class="jurador-note"><span>EL JURADOR</span><p>En SONORA, el jurador es quien escucha antes de decidir: no mide si un sonido es correcto, sino qué memoria, cuerpo o paisaje activa en quien lo oye.</p></div></div>
+        <div class="silence-console" id="silence-console">
+          <div class="silence-header"><span>SALA 04 / SILENCIOS COMPARTIDOS</span><span id="silence-status" aria-live="polite">ELEGÍ UNA NOTA</span></div>
+          <div class="silence-notes" id="silence-notes">
+            <button type="button" class="silence-note" data-step="0">DO</button><button type="button" class="silence-note" data-step="1">RE</button><button type="button" class="silence-note" data-step="2">MI</button><button type="button" class="silence-note" data-step="3">SOL</button><button type="button" class="silence-note" data-step="4">LA</button><button type="button" class="silence-note" data-step="5">DO↑</button><button type="button" class="silence-note" data-step="6">RE↑</button><button type="button" class="silence-note" data-step="7">MI↑</button><button type="button" class="silence-note" data-step="8">SOL↑</button>
+          </div>
+          <div class="silence-controls"><label>Clave <select id="silence-key"><option value="C">Do mayor</option><option value="D">Re mayor</option><option value="E">Mi mayor</option><option value="F">Fa mayor</option><option value="G">Sol mayor</option><option value="A">La mayor</option></select></label><label>Volumen <input id="silence-volume" type="range" min="0" max="100" value="48" /><output id="silence-volume-output">48%</output></label><label>Distorsión <input id="silence-distortion" type="range" min="0" max="100" value="12" /><output id="silence-distortion-output">12%</output></label></div>
+        </div>
+      </section>
+
+      <section class="resonance-hall" id="resonancia" aria-labelledby="resonance-title">
+        <div class="resonance-copy">
+          <span class="section-index">05 / SALA INTERACTIVA</span>
+          <p class="eyebrow">Composición por contacto</p>
+          <h2 id="resonance-title">Hacé sonar<br /><em>el espacio.</em></h2>
+          <p>Cuatro cuerpos suspendidos. Cada uno guarda una nota, un color y una distancia. Combinálos para componer un pequeño paisaje propio.</p>
+          <p class="small-note">Tocá las esferas. La sala escucha con vos.</p>
+        </div>
+        <div class="resonance-console" id="resonance-console">
+          <div class="resonance-header"><span>ESTUDIO DE RESONANCIAS / 02</span><span id="resonance-status" aria-live="polite">ELEGÍ UNA ESFERA</span></div>
+          <div class="resonance-space" id="resonance-space">
+            <button class="resonance-pad pad-one" type="button" data-note="c" aria-label="Activar resonancia tierra"><span>TIERRA</span></button>
+            <button class="resonance-pad pad-two" type="button" data-note="e" aria-label="Activar resonancia aire"><span>AIRE</span></button>
+            <button class="resonance-pad pad-three" type="button" data-note="g" aria-label="Activar resonancia agua"><span>AGUA</span></button>
+            <button class="resonance-pad pad-four" type="button" data-note="b" aria-label="Activar resonancia luz"><span>LUZ</span></button>
+            <span class="resonance-ring ring-one" aria-hidden="true"></span><span class="resonance-ring ring-two" aria-hidden="true"></span>
+          </div>
+          <div class="resonance-score" aria-live="polite"><span class="score-label">PARTITURA EN VIVO</span><div class="score-notes" id="score-notes"><i>—</i><i>—</i><i>—</i><i>—</i><i>—</i><i>—</i></div></div>
+          <div class="resonance-controls"><label>Intensidad <input id="resonance-intensity" type="range" min="20" max="100" value="55" /><output id="resonance-output">55%</output></label><button id="resonance-clear" type="button">Reiniciar composición</button></div>
+        </div>
+      </section>
+
+      <section class="phonotheque" id="fonoteca" aria-labelledby="phonotheque-title">
+        <div class="phonotheque-heading"><div><span class="section-index">06 / FONOTECA</span><p class="eyebrow">Obras para acompañar el recorrido</p></div><h2 id="phonotheque-title">Elegí el pulso<br /><em>del museo.</em></h2></div>
+        <div class="phonotheque-grid" role="list">
+          <button class="track-card is-selected" type="button" data-track="nocturne" role="listitem"><span>01 / CHOPIN</span><div class="track-glyph nocturne-glyph"><i></i><i></i><i></i></div><h3>Nocturno<br />Op. 9 n.º 2</h3><p>Una luz lenta para recorrer con calma.</p><b>ESTABLECER AMBIENTE ↗</b></button>
+          <button class="track-card" type="button" data-track="gymnopedie" role="listitem"><span>02 / SATIE</span><div class="track-glyph gymnopedie-glyph"><i></i><i></i><i></i></div><h3>Gymnopédie<br />n.º 1</h3><p>Pasos mínimos, aire y quietud.</p><b>ESTABLECER AMBIENTE ↗</b></button>
+          <button class="track-card" type="button" data-track="moonlight" role="listitem"><span>03 / BEETHOVEN</span><div class="track-glyph moonlight-glyph"><i></i><i></i><i></i></div><h3>Claro de luna<br />Sonata n.º 14</h3><p>Una noche abierta entre los orbitales.</p><b>ESTABLECER AMBIENTE ↗</b></button>
+        </div>
+        <p class="phonotheque-note">La obra elegida sigue sonando aunque explores otra sala.</p>
+        <p class="phonotheque-credit" style="font:9px/1.4 var(--mono);max-width:460px;color:#7f7b72;margin:10px 0 0;position:relative;z-index:1">Crédito de fonoteca: “Gymnopédie n.º 1”, interpretación de Kevin MacLeod, bajo <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer">licencia CC BY 3.0</a>.</p>
+      </section>
+
       <section class="visit" id="visita" aria-labelledby="visita-title">
         <div class="visit-art" aria-hidden="true"><div class="ripple r1"></div><div class="ripple r2"></div><div class="ripple r3"></div><div class="ripple r4"></div></div>
         <div class="visit-content">
-          <div><span class="section-index">04 / VISITAR</span><p class="eyebrow">El museo está abierto</p></div>
+          <div><span class="section-index">07 / VISITAR</span><p class="eyebrow">El museo está abierto</p></div>
           <h2 id="visita-title">Tu próxima<br /><em>escucha</em> empieza acá.</h2>
-          <div class="visit-bottom"><p>Recorré SONORA desde cualquier lugar, a tu ritmo y con tus propios auriculares.</p><a class="button-light" href="visitar.html">Quiero visitar <span>↗</span></a></div>
+          <div class="visit-bottom"><p>Recorré SONORA desde cualquier lugar, a tu ritmo y con tus propios auriculares.</p><button class="button-light paywall-open" type="button" data-paywall-open>Quiero visitar <span>↗</span></button></div>
         </div>
       </section>
     </main>
 
+    <dialog class="visit-paywall" id="visit-paywall" aria-labelledby="paywall-title">
+      <button class="paywall-close" type="button" data-paywall-close aria-label="Cerrar">×</button>
+      <p class="eyebrow">Acceso digital al museo</p><h2 id="paywall-title">Disfrutá de la belleza<br />del sonido <em>desde cualquier lugar.</em></h2>
+      <p>Una entrada abre el recorrido completo, la fonoteca y las salas de escucha activas. Elegí tu propio ritmo, desde donde estés.</p>
+      <div class="paywall-price"><span>ACCESO INDIVIDUAL</span><strong>US$ 2.99</strong></div>
+      <a class="paywall-buy" href="visitar.html">Continuar con el acceso <span>↗</span></a>
+      <small>No se procesa ningún pago en este sitio de demostración.</small>
+    </dialog>
+
     <footer>
       <a class="wordmark" href="#inicio">SONORA<span>®</span></a>
       <p>Museo Digital de la Percepción SONORA<br />Funes · 2026</p>
-      <div><a href="https://instagram.com/fran.dubua/" target="_blank">Instagram</a><a href="mailto:riojinzxc@gmail.com">Contacto</a><a href="#inicio">Arriba!</a></div>
-      <small>© SONORA — Todos los derechos reservados.</small>
+      <div class="footer-links"><a href="https://instagram.com/fran.dubua/" target="_blank" rel="noreferrer">Instagram</a><a href="mailto:riojinzxc@gmail.com">Contacto</a><a href="#inicio">Arriba!</a></div>
+      <details class="credits"><summary>Créditos del proyecto <span>+</span></summary><dl><div><dt>Director del Proyecto</dt><dd>Dubois Francisco</dd></div><div><dt>Programador Principal</dt><dd>Dubois Francisco</dd></div><div><dt>Desarrollador web</dt><dd>Da Campo Santiago</dd></div><div><dt>Diseñador UX/UI</dt><dd>Da Campo Santiago</dd></div><div><dt>Diseñador gráfico</dt><dd>Da Campo Santiago, Gemini, ChatGPT</dd></div><div><dt>Director creativo</dt><dd>Da Campo Santiago</dd></div><div><dt>Investigación y contenido</dt><dd>Dubois Francisco, ChatGPT</dd></div><div><dt>Edición de audio</dt><dd>Dubois Francisco</dd></div><div><dt>Testing</dt><dd>Da Campo Santiago, Mosto Joaquín</dd></div><div><dt>Agradecimientos</dt><dd>Soledad Lanzini, 4to "B"</dd></div></dl></details>
+      <small><span>© SONORA — Todos los derechos reservados.</span><span class="affiliate">Afiliado con la Compañía 67©</span></small>
     </footer>
+    <script src="museum-sounds.js"></script>
+    <script src="ambient.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
